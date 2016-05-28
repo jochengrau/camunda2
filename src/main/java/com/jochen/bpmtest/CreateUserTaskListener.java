@@ -35,12 +35,12 @@ public class CreateUserTaskListener implements TaskListener {
             logger.info("task: " + task.toString());
             myTask = task;
         }
-        try {
-            Thread.sleep(5000);
-            taskService.complete(delegateTask.getId());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(500000);
+//            taskService.complete(delegateTask.getId());
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
     }
 }

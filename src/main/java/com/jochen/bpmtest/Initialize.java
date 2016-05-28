@@ -25,6 +25,6 @@ public class Initialize implements JavaDelegate {
         for(String key: keySet){
             logger.info("key: " + key + " value: " + variables.getValueTyped(key).toString());
         }
-        execution.setVariable("manual", true);
+//        execution.setVariable("manual", true);
     }
 }

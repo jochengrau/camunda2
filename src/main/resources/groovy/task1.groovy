@@ -6,6 +6,6 @@ package groovy
 
 println 'Groovy script called by task!'
 println 'manual: ' + execution.getVariable('manual')
-println 'first: ' + execution.getVariable('first').toString()
+println 'flightEvent: ' + execution.getVariable('flightEvent')
 
 execution.setVariable('groovy_result', 42)

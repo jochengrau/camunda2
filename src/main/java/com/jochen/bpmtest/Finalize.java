@@ -3,6 +3,8 @@ package com.jochen.bpmtest;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.VariableMap;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
+import org.camunda.bpm.engine.variable.value.TypedValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +24,16 @@ public class Finalize implements JavaDelegate {
         VariableMap variables = processInstance.getVariablesTyped();
         Set<String> keySet = variables.keySet();
         for (String key : keySet) {
-            logger.info("key: " + key + " value: " + variables.getValueTyped(key).toString());
+            TypedValue valueTyped = variables.getValueTyped(key);
+            if(key.equals("flightEvent")){
+                ObjectValue objectValue = (ObjectValue) valueTyped;
+                String valueSerialized = objectValue.getValueSerialized();
+                FlightEvent flightEvent = objectValue.getValue(FlightEvent.class);
+                logger.info("key: " + key + " serialized value: " + valueSerialized + " value: " + flightEvent.toString());
+            }
+            else {
+                logger.info("key: " + key + " value: " + valueTyped.toString());
+            }
         }
     }
 }

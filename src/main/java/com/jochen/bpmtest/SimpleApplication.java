@@ -6,6 +6,8 @@ import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.spring.boot.starter.CamundaBpmProperties;
 import org.camunda.bpm.spring.boot.starter.SpringBootProcessApplication;
+//import org.camunda.bpm.spring.boot.starter.rest.CamundaJerseyResourceConfig;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 public class SimpleApplication implements CommandLineRunner {
 
   boolean contextClosed;
@@ -32,17 +34,17 @@ public class SimpleApplication implements CommandLineRunner {
 
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  @Autowired
-  private HistoryService historyService;
+//  @Autowired
+//  private HistoryService historyService;
+//
+//  @Autowired
+//  private ConfigurableApplicationContext context;
+//
+//  @Autowired
+//  private CamundaBpmProperties camundaBpmProperties;
 
-  @Autowired
-  private ConfigurableApplicationContext context;
-
-  @Autowired
-  private CamundaBpmProperties camundaBpmProperties;
-
-  @Autowired
-  private Showcase showcase;
+//  @Autowired
+//  private Showcase showcase;
 
   @Autowired
   private SpringBootProcessApplication springBootProcessApplication;
@@ -52,47 +54,52 @@ public class SimpleApplication implements CommandLineRunner {
     return new SpringBootProcessApplication();
   }
 
+//  @Bean
+//  public ResourceConfig jerseyConfig() {
+//    return new CamundaJerseyResourceConfig();
+//  }
+
   @EventListener
   public void contextClosed(ContextClosedEvent event) {
     logger.info("context closed!");
     contextClosed = true;
   }
 
-  @Scheduled(fixedDelay = 1500L)
-  public void exitApplicationWhenProcessIsFinished() {
-    String processInstanceId = showcase.getProcessInstanceId();
-
-    if (processInstanceId == null) {
-      logger.info("processInstance not yet started!");
-      return;
-    }
-
-    if (isProcessInstanceFinished()) {
-      logger.info("processinstance ended!");
-
-      SpringApplication.exit(context, new ExitCodeGenerator() {
-
-        @Override
-        public int getExitCode() {
-          return 0;
-        }
-      });
-      return;
-    }
-    logger.info("processInstance not yet ended!");
-  }
-
-  public boolean isProcessInstanceFinished() {
-      final HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
-        .processInstanceId(showcase.getProcessInstanceId())
-        .singleResult();
-
-      return historicProcessInstance != null && historicProcessInstance.getEndTime() != null;
-
-  }
+//  @Scheduled(fixedDelay = 1500L)
+//  public void exitApplicationWhenProcessIsFinished() {
+//    String processInstanceId = showcase.getProcessInstanceId();
+//
+//    if (processInstanceId == null) {
+//      logger.info("processInstance not yet started!");
+//      return;
+//    }
+//
+//    if (isProcessInstanceFinished()) {
+//      logger.info("processinstance ended!");
+//
+//      SpringApplication.exit(context, new ExitCodeGenerator() {
+//
+//        @Override
+//        public int getExitCode() {
+//          return 0;
+//        }
+//      });
+//      return;
+//    }
+//    logger.info("processInstance not yet ended!");
+//  }
+//
+//  public boolean isProcessInstanceFinished() {
+//      final HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
+//        .processInstanceId(showcase.getProcessInstanceId())
+//        .singleResult();
+//
+//      return historicProcessInstance != null && historicProcessInstance.getEndTime() != null;
+//
+//  }
 
   @Override
   public void run(String... strings) throws Exception {
-    logger.error(ToStringBuilder.reflectionToString(camundaBpmProperties.getApplication(), ToStringStyle.MULTI_LINE_STYLE));
+//    logger.error(ToStringBuilder.reflectionToString(camundaBpmProperties.getApplication(), ToStringStyle.MULTI_LINE_STYLE));
   }
 }
