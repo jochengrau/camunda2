@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="ManualDecision" name="CmnDecision">
+    <decisionTable id="decisionTable">
+      <input id="input1" label="airline">
+        <inputExpression id="inputExpression1" typeRef="string">        <text>airline</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0h2wq0w" label="origin">
+        <inputExpression id="LiteralExpression_0h4osw8" typeRef="string" expressionLanguage="Groovy">        <text>return flightEvent.getDepStation()</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="dmnResult" name="dmnOutput" typeRef="boolean" />
+      <rule id="row-557688787-1">
+        <inputEntry id="UnaryTests_0oeu8ou">        <text><![CDATA["DLH"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ipgfr8">        <text><![CDATA["EDDF"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1bdnfrc">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-557688787-2">
+        <inputEntry id="UnaryTests_0l9n0rz">        <text><![CDATA["AFR"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1s8aql7">        <text><![CDATA["EDDF"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1oko3na">        <text>false</text>
+</outputEntry>
+      </rule>
+      <rule id="row-557688787-4">
+        <inputEntry id="UnaryTests_1tc3m1l">        <text><![CDATA["DLH"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_09v94rk">        <text><![CDATA["EDDM"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_18jk2jx">        <text>false</text>
+</outputEntry>
+      </rule>
+      <rule id="row-557688787-5">
+        <inputEntry id="UnaryTests_05ueaj7">        <text><![CDATA["AFR"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0c28f2x">        <text><![CDATA["EDDM"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1f62dyj">        <text>true</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

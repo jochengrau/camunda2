@@ -45,12 +45,14 @@ public class WorkFlowController {
     @RequestMapping(value = "/wfstart", method = RequestMethod.PUT)
     public String startWorkflow(@RequestParam(value = "wfname") String wfName,
                                 @RequestParam(value = "manual", defaultValue = "true") Boolean manual,
-                                @RequestParam(value = "airline", defaultValue = "DLH") String airline){
-        FlightEvent flightEvent = new FlightEvent(airline, 400, new Date(), new Date(), "A380", "EDDF", "EDDM");
+                                @RequestParam(value = "airline", defaultValue = "DLH") String airline,
+                                @RequestParam(value = "origin", defaultValue = "EDDF") String origin){
+        FlightEvent flightEvent = new FlightEvent(airline, 400, new Date(), new Date(), "A380", origin, "EDDM");
         ObjectValue objectValue = Variables.objectValue(flightEvent).serializationDataFormat("application/json").create();
         VariableMap variableMap = Variables.createVariables()
                 .putValueTyped("flightEvent", objectValue)
-                .putValueTyped("manual", Variables.booleanValue(manual));
+                .putValueTyped("manual", Variables.booleanValue(manual))
+                .putValueTyped("airline", Variables.stringValue(airline));
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(wfName, variableMap);
         return processInstance.getProcessInstanceId();
     }
