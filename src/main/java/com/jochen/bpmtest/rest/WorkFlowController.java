@@ -53,7 +53,9 @@ public class WorkFlowController {
                 .putValueTyped("flightEvent", objectValue)
                 .putValueTyped("manual", Variables.booleanValue(manual))
                 .putValueTyped("airline", Variables.stringValue(airline));
+        logger.info("WorkFlowController starting workflow ...");
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(wfName, variableMap);
+        logger.info("WorkFlowController workflow with ID " + processInstance.getProcessInstanceId() + " started." );
         return processInstance.getProcessInstanceId();
     }
 

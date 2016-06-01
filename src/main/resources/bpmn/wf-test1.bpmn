@@ -77,6 +77,21 @@
       <bpmn:incoming>SequenceFlow_046brl8</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_17yq7uq</bpmn:outgoing>
     </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="ServiceTask_1m4iouz" name="Timeout Handler" camunda:class="com.jochen.bpmtest.TimeoutHandler">
+      <bpmn:incoming>SequenceFlow_1txbl3l</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1193oi7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_0bwtlc2" name="End Process 2">
+      <bpmn:incoming>SequenceFlow_1193oi7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_1uug82j" name="Initialize Timeout" attachedToRef="UserTask_0is1zb2">
+      <bpmn:outgoing>SequenceFlow_1txbl3l</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1txbl3l" sourceRef="BoundaryEvent_1uug82j" targetRef="ServiceTask_1m4iouz" />
+    <bpmn:sequenceFlow id="SequenceFlow_1193oi7" sourceRef="ServiceTask_1m4iouz" targetRef="EndEvent_0bwtlc2" />
   </bpmn:process>
   <bpmn:message id="Message_1qu4910" name="wf-test1_end" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -214,6 +229,35 @@
       <bpmndi:BPMNShape id="BusinessRuleTask_117bauh_di" bpmnElement="BusinessRuleTask_117bauh">
         <dc:Bounds x="421" y="61" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1m4iouz_di" bpmnElement="ServiceTask_1m4iouz">
+        <dc:Bounds x="702.636815920398" y="-98" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0bwtlc2_di" bpmnElement="EndEvent_0bwtlc2">
+        <dc:Bounds x="869.636815920398" y="-76" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="842.636815920398" y="-40" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_1uug82j_di" bpmnElement="BoundaryEvent_1uug82j">
+        <dc:Bounds x="734.636815920398" y="43" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="707.636815920398" y="79" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1txbl3l_di" bpmnElement="SequenceFlow_1txbl3l">
+        <di:waypoint xsi:type="dc:Point" x="753" y="43" />
+        <di:waypoint xsi:type="dc:Point" x="753" y="-18" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="269" y="204" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1193oi7_di" bpmnElement="SequenceFlow_1193oi7">
+        <di:waypoint xsi:type="dc:Point" x="803" y="-58" />
+        <di:waypoint xsi:type="dc:Point" x="870" y="-58" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="791.5" y="-68" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

@@ -26,5 +26,8 @@ public class Initialize implements JavaDelegate {
             logger.info("key: " + key + " value: " + variables.getValueTyped(key).toString());
         }
 //        execution.setVariable("manual", true);
+//        logger.info("Initalize going to sleep ...");
+//        Thread.sleep(10000);
+//        logger.info("Initalize proceed after sleep ...");
     }
 }
