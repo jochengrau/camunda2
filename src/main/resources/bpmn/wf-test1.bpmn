@@ -38,7 +38,7 @@
       <bpmn:incoming>SequenceFlow_1wckgw3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0uwwwrp</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="UserTask_0is1zb2" name="User Task 1">
+    <bpmn:userTask id="UserTask_0is1zb2" name="User Task 1" camunda:candidateGroups="dispatchers">
       <bpmn:extensionElements>
         <camunda:taskListener class="com.jochen.bpmtest.CreateUserTaskListener" event="create" />
         <camunda:taskListener class="com.jochen.bpmtest.CompleteUserTaskListener" event="complete" />
@@ -87,7 +87,7 @@
     <bpmn:boundaryEvent id="BoundaryEvent_1uug82j" name="Initialize Timeout" attachedToRef="UserTask_0is1zb2">
       <bpmn:outgoing>SequenceFlow_1txbl3l</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1txbl3l" sourceRef="BoundaryEvent_1uug82j" targetRef="ServiceTask_1m4iouz" />
