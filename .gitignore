@@ -13,6 +13,7 @@
 hs_err_pid*
 
 .idea
+*.iml
 target
 
 # Created by .ignore support plugin (hsz.mobi)
