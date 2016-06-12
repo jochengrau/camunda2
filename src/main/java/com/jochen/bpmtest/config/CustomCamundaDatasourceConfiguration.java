@@ -2,7 +2,7 @@ package com.jochen.bpmtest.config;
 
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration;
 import org.camunda.bpm.spring.boot.starter.configuration.CamundaDatasourceConfiguration;
-import org.postgresql.jdbc3.Jdbc3SimpleDataSource;
+import org.h2.Driver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -24,10 +24,10 @@ public class CustomCamundaDatasourceConfiguration implements CamundaDatasourceCo
     @Override
     public void apply(SpringProcessEngineConfiguration springProcessEngineConfiguration) {
         DataSource dataSource = new SimpleDriverDataSource();
-        ((SimpleDriverDataSource)dataSource).setDriverClass(org.postgresql.Driver.class);
-        ((SimpleDriverDataSource)dataSource).setUrl("jdbc:postgresql://localhost:5432/camunda");
-        ((SimpleDriverDataSource)dataSource).setUsername("jochen");
-        ((SimpleDriverDataSource)dataSource).setPassword("jotanja");
+        ((SimpleDriverDataSource)dataSource).setDriverClass(Driver.class);
+        ((SimpleDriverDataSource)dataSource).setUrl("jdbc:h2:mem:camunda;DB_CLOSE_DELAY=1000");
+        ((SimpleDriverDataSource)dataSource).setUsername("sa");
+        ((SimpleDriverDataSource)dataSource).setPassword("sa");
         springProcessEngineConfiguration.setDataSource(dataSource);
         springProcessEngineConfiguration.setTransactionManager(new DataSourceTransactionManager(dataSource));
         springProcessEngineConfiguration.setDatabaseSchemaUpdate("true");
